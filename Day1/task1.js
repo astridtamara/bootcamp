@@ -5,3 +5,5 @@ function map(array, fn){
 
 let result = map([1,2,3], (num) => num * 2);
 console.log(result);
+
+
