@@ -27,15 +27,15 @@ it('should consider empty arrays to be equal', () => {
     expect(result).toEqual(true);
 });
 
-it('should consider empty arrays to be equal', () => {
+it('should consider array type to be different', () => {
     let result = compareArrays(
         [1,3,5],
         [1,"3",5]
     );
-    expect(result).toEqual(true);
+    expect(result).toEqual(false);
 });
 
-it('should consider empty arrays to be equal', () => {
+it('should consider same valued arrays to be equal', () => {
     let result = compareArrays(
         [1,3,5],
         [1,3,5]

@@ -7,7 +7,7 @@ function compareArrays(arrOne, arrTwo) {
   }
 
   for (let i = 0; i < length1; i++) {
-    if (arr1[i] !== arr2[i]) {
+    if (arrOne[i] !== arrTwo[i]) {
       return false;
     }
   }
