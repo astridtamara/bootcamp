@@ -20,3 +20,25 @@ it('should consider empty objects to be equal', () => {
     );
     expect(result).toEqual(false);
 });
+
+
+it('should consider empty arrays to be equal', () => {
+    let result = compareArrays([],[]);
+    expect(result).toEqual(true);
+});
+
+it('should consider empty arrays to be equal', () => {
+    let result = compareArrays(
+        [1,3,5],
+        [1,"3",5]
+    );
+    expect(result).toEqual(true);
+});
+
+it('should consider empty arrays to be equal', () => {
+    let result = compareArrays(
+        [1,3,5],
+        [1,3,5]
+    );
+    expect(result).toEqual(true);
+});
