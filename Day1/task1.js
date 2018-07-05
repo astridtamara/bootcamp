@@ -3,7 +3,14 @@ function map(array, fn){
     return newArray;
 }
 
-let result = map([1,2,3], (num) => num * 2);
+function doubled(num) {
+  return num * 2;
+}
+
+let numbers = [1,2,3];
+let result = numbers.map(doubled);
 console.log(result);
 
-
+numbers.forEach((...arg) => {
+  console.log('arguments : ', arg);
+})

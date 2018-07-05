@@ -37,7 +37,7 @@ it('should consider array type to be different', () => {
 
 it('should consider same valued arrays to be equal', () => {
     let result = compareArrays(
-        [1,3,5],
+        [1,3,7],
         [1,3,5]
     );
     expect(result).toEqual(true);

@@ -2,15 +2,16 @@ function compare(arr1, arr2){
     let length1 = arr1.length;
     let length2 = arr2.length;
 
-    if(length1 != length2) return false;
+    if (length1 != length2) return false;
 
-    for(let i =0; i < length1;i++){
-        if(arr1[i] != arr2[i]) {
-            return false;
-        }
-    }
-    return true;
+    if(Array.isArray(arr1) && Array.isArray(arr2)) {
+      for(let i =0; i < length1;i++){
+          if(arr1[i] !== arr2[i]) {
+              return false;
+          }
+      }
+      return true;
+    } else return false;
 }
 
-let result = compare([1,3,5], [1,3,5]);
-console.log(result);
+console.log(compare([1, 2, 3], [1,2,3]));

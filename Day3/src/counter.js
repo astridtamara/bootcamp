@@ -1,11 +1,11 @@
-function createCounter() {
-  let count = 0;
+function createCounter(num) {
+  let count = num || 0;
   return {
-    inc: () => {
-      count += 1;
+    inc: (incNum = 1) => {
+      count += incNum;
     },
-    dec: () => {
-      count -= 1;
+    dec: (decNum = 1) => {
+      count -= decNum;
     },
     getCount: () => count
   };

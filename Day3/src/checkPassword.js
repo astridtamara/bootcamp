@@ -1,17 +1,17 @@
 // @flow
 
-function checkPassword(password) {
-  if (password.length < 6) {
+function checkPassword(password : string) {
+  if (password.length < 6) {    
     return {
       success: false,
       reason: "Password is shorter than 6 characters"
     };
   }
-  let lowerCase = false,
-    upperCase = false;
+  let lowerCase = false;
+  let upperCase = false;
   for (let i = 0; i < password.length; i++) {
     // Check for lowercase letter
-    if (isNaN(password.charAt(i) * 1)) {
+    if (isNaN(password.charAt(i))) {
       if (password.charAt(i) === password.charAt(i).toLowerCase()) {
         lowerCase = true;
       }
