@@ -22,7 +22,7 @@ function createCallLog(createTimestamp: Function = defaultCreateTimestamp) {
         timestamp: createTimestamp(),
       });
     },
-    getRecent: (maxNum: number = callLog.length) => {
+    getRecent: (maxNum: number = callLog.length) => Array<Call> {
       // $FlowFixMe
       return callLog.slice(0, maxNum);
     },
