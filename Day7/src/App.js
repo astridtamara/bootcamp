@@ -1,8 +1,16 @@
 // @flow
-import React from 'react';
+import type {ToDoItem, ToDoList} from './types/ToDoItem';
 
-function App() {
-  return <p>Hello World</p>;
+function renderToDo(item: ToDoItem){
+  console.log(item);
+  let content = item.isDone? `<s>${item.name}<s>` : item.name;
+  return `<li onClick="emitEvent('toggleDone', ${item.id})">${content}</li>`;
 }
 
-export default App;
+function renderApp(state: ToDoList){
+    return `<ul>
+          ${state.toDoItems.map( (item) => renderToDo(item)).join('')}  
+          </ul>`;
+}
+
+export default renderApp;

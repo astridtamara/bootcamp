@@ -1,11 +1,31 @@
 // @flow
-import React from 'react';
-import App from './App';
-import {render} from 'react-dom';
+import renderApp from './App';
+import eventHandlers from './eventHandlers';
+import initialState from './initialState';
+import type {State} from './types/State';
 
-let container = document.createElement('div');
-if (document.body) {
-  document.body.appendChild(container);
+let state = initialState;
+
+// global.changeName = () => {
+//   state.name = 'Yosua';
+//   console.log('Name has been changed succesfully');
+//   render();
+// }
+
+global.emitEvent = (eventName, id) => {
+  let eventHandler = eventHandlers[eventName];
+  if(eventHandler) {
+    state = eventHandler(state, id);
+    render();
+  }
 }
 
-render(<App />, container);
+
+function render(){
+  let html = renderApp(state);
+  if(document.body){
+      document.body.innerHTML = html;
+  }
+}
+
+render();
