@@ -7,5 +7,6 @@ export type ToDoItem = {
 };
 
 export type ToDoList = {
-    toDoItems: Array<ToDoItem>
+    toDoItems: Array<ToDoItem>,
+    newItem : string,
 }

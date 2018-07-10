@@ -12,10 +12,10 @@ let state = initialState;
 //   render();
 // }
 
-global.emitEvent = (eventName, id) => {
+global.emitEvent = (eventName, value) => {
   let eventHandler = eventHandlers[eventName];
   if(eventHandler) {
-    state = eventHandler(state, id);
+    state = eventHandler(state, value);
     render();
   }
 }
