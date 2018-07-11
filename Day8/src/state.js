@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {render} from './main'
+import {render} from './main';
 
 type ToDoItem = {
   id: number,
@@ -11,6 +11,7 @@ type ToDoItem = {
 
 export type State = {
   toDoItems: Array<ToDoItem>,
+  newItem: string,
 };
 
 let state: State = {
@@ -19,10 +20,11 @@ let state: State = {
     {id: 2, content: 'Sleep', isDone: false},
     {id: 3, content: 'Repeat', isDone: false},
   ],
+  newItem: '',
 };
 
-export function getState() : State {
-    return state;
+export function getState(): State {
+  return state;
 }
 
 export function setState(newState: State) {

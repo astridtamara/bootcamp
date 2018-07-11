@@ -18,10 +18,25 @@ function App(props: Props) {
     });
     setState({...state, toDoItems: newToDoItems});
   }
+  let textChange = (event) => {
+    setState({...state, newItem : event.target.value});
+  }
+  let addItem = () => {
+    let newToDoItem = {
+      id: state.toDoItems[state.toDoItems.length - 1].id + 1,
+      content: state.newItem,
+      isDone: false,
+    };
+    setState({...state, toDoItems: [...state.toDoItems, newToDoItem], newItem : ''});
+  }
   return (
-    <ul>
-      {toDoItems.map((item) => <ToDoItem item={item} toggleDone={toggleDone}/>)}
-    </ul>
+    <div>
+      <ul>
+        {toDoItems.map((item) => <ToDoItem item={item} toggleDone={toggleDone}/>)}
+      </ul>
+      <input type="text" value={state.newItem} onChange={evt => textChange(evt)}/>
+      <button name="submit" onClick={()=>addItem()}>Add</button>
+    </div>
   );
 }
 
