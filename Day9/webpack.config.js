@@ -23,5 +23,5 @@ module.exports = {
     publicPath: '/',
     filename: '[name].js',
   },
-  module: {loaders: loaders},
+  module: {rules: loaders},
 };
