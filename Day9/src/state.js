@@ -8,5 +8,6 @@ export type ToDoItem = {
 export type State = {
   allItems: Array<ToDoItem>,
   toDoItems: Array<ToDoItem>,
-  clearInput: boolean,
+  newItem: string,
+  selectedIdx: number,
 };

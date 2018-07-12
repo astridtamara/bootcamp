@@ -6,6 +6,11 @@ import NewItemForm from './newItemForm';
 
 type Props = {};
 
+const listStyle = {
+  padding: 3,
+  listStyle: 'none',
+};
+
 class App extends Component<Props, State> {
   state = {
     allItems: [
@@ -18,29 +23,64 @@ class App extends Component<Props, State> {
       {id: 2, content: 'Work', isDone: false},
       {id: 3, content: 'Sleep', isDone: false},
     ],
-    clearInput: false,
+    newItem: '',
+    selectedIdx: 0,
   };
-  
+
+  componentDidMount() {
+    document.addEventListener('keyup', this._onKeyUp);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keyup', this._onKeyUp);
+  }
+
+  _onKeyUp = (event: Object) => {
+    let {selectedIdx, toDoItems} = this.state;
+    let maxIdx = toDoItems.length - 1;
+    let newIdx = selectedIdx;
+    if (event.key === 'ArrowUp') {
+      newIdx = Math.max(0, selectedIdx - 1);
+    }
+    if (event.key === 'ArrowDown') {
+      newIdx = Math.min(selectedIdx + 1, maxIdx);
+    }
+    if (newIdx !== selectedIdx && document.activeElement === document.body) {
+      this.setState({selectedIdx: newIdx});
+    }
+    if (event.key === ' ' && document.activeElement === document.body) {
+      let notDoneItems = toDoItems.filter((item) => !item.isDone);
+      let doneItems = toDoItems.filter((item) => item.isDone);
+      let newToDoItems = [...notDoneItems, ...doneItems];
+      let selectedItem = newToDoItems[selectedIdx];
+      this._onToggleDone(selectedItem.id);
+    }
+  };
+
   render() {
-    let {toDoItems} = this.state;
+    let {toDoItems, selectedIdx} = this.state;
+    let notDoneItems = toDoItems.filter((item) => !item.isDone);
+    let doneItems = toDoItems.filter((item) => item.isDone);
+    let newToDoItems = [...notDoneItems, ...doneItems];
     return (
       <div>
         <input type="text" placeholder="Search" onChange={this._onSearch} />
-        <ul>
-          {toDoItems.map((item) => {
-            if (!item.isDone) {
-              return <ToDoItem item={item} toggleDone={this._onToggleDone} />;
-            }
-          })}
-          {toDoItems.map((item) => {
-            if (item.isDone) {
-              return <ToDoItem item={item} toggleDone={this._onToggleDone} />;
-            }
+        <ul style={listStyle}>
+          {newToDoItems.map((item, index) => {
+            let isSelected = selectedIdx === index ? true : false;
+            return (
+              <ToDoItem
+                item={item}
+                isSelected={isSelected}
+                toggleDone={this._onToggleDone}
+              />
+            );
           })}
         </ul>
         <NewItemForm
           onAddItem={this._onAddItem}
-          clearInput={this.state.clearInput}
+          onTextChange={this._onTextChange}
+          newItem={this.state.newItem}
         />
         <button onClick={this._onClearInput}>Clear Input</button>
       </div>
@@ -82,7 +122,11 @@ class App extends Component<Props, State> {
   };
 
   _onClearInput = () => {
-    this.setState({clearInput: true});
+    this.setState({newItem: ''});
+  };
+
+  _onTextChange = (content: string) => {
+    this.setState({newItem: content});
   };
 }
 

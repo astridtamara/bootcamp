@@ -3,43 +3,26 @@ import React, {Component} from 'react';
 
 type Props = {
   onAddItem: (content: string) => void,
-  clearInput: boolean,
-};
-type State = {
+  onTextChange: (content: string) => void,
   newItem: string,
 };
 
-class NewItemForm extends Component<Props, State> {
-  state = {
-    newItem: '',
+function NewItemForm(props: Props) {
+  let onTextChange = (event: Object) => {
+    props.onTextChange(event.target.value);
   };
-  render() {
-    if (this.props.clearInput) {
-      this.setState({newItem: ''});
-      this.props.clearInput = false;
-    }
-    return (
-      <div>
-        <input
-          type="text"
-          value={this.state.newItem}
-          onChange={this.textChange}
-        />
-        <button name="submit" onClick={this._onSubmit}>
-          Add
-        </button>
-      </div>
-    );
-  }
-
-  textChange = (event: Object) => {
-    this.setState({newItem: event.target.value});
+  let _onSubmit = () => {
+    props.onAddItem(this.props.newItem);
+    props.onTextChange('');
   };
-
-  _onSubmit = () => {
-    this.props.onAddItem(this.state.newItem);
-    this.setState({newItem: ''});
-  };
+  return (
+    <div>
+      <input type="text" value={props.newItem} onChange={onTextChange} />
+      <button name="submit" onClick={_onSubmit}>
+        Add
+      </button>
+    </div>
+  );
 }
 
 export default NewItemForm;
