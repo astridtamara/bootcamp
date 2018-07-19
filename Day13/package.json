@@ -1,0 +1,35 @@
+{
+  "name": "Day13",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Day13",
+  "scripts": {
+    "start": "webpack-dev-server --content-base assets/",
+    "build": "webpack",
+    "build-watch": "webpack --watch",
+    "format": "prettier-eslint --write \"src/**/*.js\"",
+    "lint": "eslint . --max-warnings 0",
+    "typecheck": "flow",
+    "test-src": "jest",
+    "test": "npm run lint && npm run typecheck && npm run test-src"
+  },
+  "dependencies": {
+    "class-autobind": "^0.1.4",
+    "classnames": "^2.2.6",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
+  },
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "jest": {
+    "setupTestFrameworkScriptFile": "./test/setup.js"
+  },
+  "prettier": {
+    "bracketSpacing": false,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "arrowParens": "always"
+  }
+}
