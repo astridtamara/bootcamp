@@ -10,16 +10,19 @@ import FavoriteScreen from './FavoriteScreen';
 
 type Props = {};
 
-type State = {currScreen: Route};
+type State = {
+  currScreen: Route,
+  favorites: Array<string>,
+};
 
 export default class App extends Component<Props, State> {
   state = {
     currScreen: 'HOME',
+    favorites: [],
   };
-  favorites: Array<string> = [];
 
   render() {
-    let {currScreen} = this.state;
+    let {currScreen, favorites} = this.state;
     if (currScreen === 'HOME') {
       return <HomeScreen navigateTo={this._navigateTo} />;
     } else if (currScreen === 'SEARCH') {
@@ -27,7 +30,7 @@ export default class App extends Component<Props, State> {
         <SearchScreen
           navigateTo={this._navigateTo}
           setFavorite={this._setFavorite}
-          favorites={this.favorites}
+          favorites={favorites}
         />
       );
     } else if (currScreen === 'FAVORITE') {
@@ -35,7 +38,7 @@ export default class App extends Component<Props, State> {
         <FavoriteScreen
           navigateTo={this._navigateTo}
           setFavorite={this._setFavorite}
-          favorites={this.favorites}
+          favorites={favorites}
         />
       );
     }
@@ -46,11 +49,13 @@ export default class App extends Component<Props, State> {
   };
 
   _setFavorite = (link: string) => {
-    let idx = this.favorites.indexOf(link);
+    let {favorites} = this.state;
+    let idx = favorites.indexOf(link);
     if (idx === -1) {
-      this.favorites.push(link);
+      this.setState({favorites: [...favorites, link]});
     } else {
-      this.favorites.splice(idx, 1);
+      let newFav = favorites.splice(idx, 1);
+      this.setState({favorites: newFav});
     }
   };
 }

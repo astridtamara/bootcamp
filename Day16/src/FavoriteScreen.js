@@ -42,10 +42,7 @@ export default class SearchScreen extends Component<Props, State> {
                 <View style={styles.imageContainer} key={index}>
                   <TouchableOpacity
                     activeOpacity={0.5}
-                    onPress={() => {
-                      setFavorite(link);
-                      this.setState({});
-                    }}
+                    onPress={() => setFavorite(link)}
                   >
                     <Image style={styles.imgStyle} source={{uri: link}} />
                   </TouchableOpacity>
